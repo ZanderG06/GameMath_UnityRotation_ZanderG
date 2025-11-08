@@ -4,6 +4,7 @@ public class LookAt : MonoBehaviour
 {
     public GameObject childCube;
     public GameObject target;
+    private float time = 0.0f;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,6 +15,7 @@ public class LookAt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
+        time += Time.deltaTime;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target.transform.position - transform.position), time);
     }
 }
